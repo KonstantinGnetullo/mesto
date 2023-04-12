@@ -8,4 +8,5 @@
 - Flexbox
 - Grid layout
 - Адаптивная верстка Desktop first
-- Анимация и др.
+- Анимация
+- JS
