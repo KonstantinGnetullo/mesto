@@ -2,7 +2,9 @@
   all: unset;
   width: 24px;
   height: 24px;
+  margin-bottom: 9px;
   border: 1px solid rgba(255, 255, 255);
+  box-sizing: border-box;
   align-self: end;
   background-image: url(../../../images/edit_btn.svg);
   background-repeat: no-repeat;
@@ -23,6 +25,7 @@
   .profile__edit-btn {
     width: 18px;
     height: 18px;
+    margin-bottom: 6.5px;
     background-size: 7.5px;
   }
 }

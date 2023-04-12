@@ -1,8 +1,13 @@
 .element__group {
   max-width: 246px;
-  max-height: 30px;
-  margin: 21px 15px 31px 21px;
+  margin: 21px 15px 26px 21px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 570px) {
+  .element__group {
+    margin-bottom: 25.3px;
+  }
 }
