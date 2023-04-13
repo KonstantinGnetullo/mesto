@@ -1,6 +1,7 @@
 .profile__title-button {
   display: flex;
   flex-direction: row;
+  max-width: 100%;
 }
 
 @media screen and (max-width: 570px) {
