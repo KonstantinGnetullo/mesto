@@ -1,0 +1,33 @@
+.popup__create-btn {
+  all:unset;
+  width: calc(100% - 36px*2);
+  height: 50px;
+  margin: 18px 36px 37px;
+  padding: 0;
+  background-color: black;
+  color: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1.21%;
+  font-weight: 400;
+  text-align: center;
+
+}
+
+.popup__create-btn:hover {
+opacity: .8;
+}
+
+.popup__create-btn:active {
+opacity: 1;
+}
+
+@media screen and (max-width: 411px) {
+  .popup__create-btn {
+    width: calc(100% - 22px*2);
+    height: 46px;
+    margin: 13px 22px 25px;
+    font-size: 4.375vw;
+  }
+}

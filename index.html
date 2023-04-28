@@ -24,64 +24,12 @@
                 <p class="profile__subtitle">Исследователь океана</p>
               </div>
           </div>
+          <!-- кнопка попап - добавление карточки-->
           <button class="profile__add-btn" type="button" aria-label="добавить"></button>
         </section>
   
-        <section class="elements">
-          <!-- карточка 1 Москва -->
-          <article class="element">
-            <img src="./images/moscow.jpg" alt="Москва" class="element__image">
-            <div class="element__group">
-              <h2 class="element__title">Москва</h2>
-              <button class="element__btn-like" type="button" aria-label="лайк"></button>
-            </div>
-          </article>
-  
-          <!-- карточка 2 Эльбрус-->
-          <article class="element">
-            <img src="./images/elbrus.jpg" alt="Эльбрус" class="element__image">
-            <div class="element__group">
-              <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__btn-like" type="button" aria-label="лайк"></button>
-            </div>
-          </article>
-  
-          <!-- карточка 3 Алтай-->
-          <article class="element">
-            <img src="./images/altai.jpg" alt="Алтай" class="element__image">
-            <div class="element__group">
-              <h2 class="element__title">Алтай</h2>
-              <button class="element__btn-like" type="button" aria-label="лайк"></button>
-            </div>
-          </article>
-  
-          <!-- карточка 4 Териберка -->
-          <article class="element">
-            <img src="./images/teriberka.jpg" alt="Териберка" class="element__image">
-            <div class="element__group">
-              <h2 class="element__title">Териберка</h2>
-              <button class="element__btn-like" type="button" aria-label="лайк"></button>
-            </div>
-          </article>
-  
-          <!-- карточка 5 Санкт-Петербург -->
-          <article class="element">
-            <img src="./images/SP.jpg" alt="Санкт-Петербург" class="element__image">
-            <div class="element__group">
-              <h2 class="element__title">Санкт-Петербург</h2>
-              <button class="element__btn-like" type="button" aria-label="лайк"></button>
-            </div>
-          </article>
-  
-          <!-- карточка 6 Карачаево-Черкесия -->
-          <article class="element">
-            <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия" class="element__image">
-            <div class="element__group">
-              <h2 class="element__title">Карачаево-Черкесия</h2>
-              <button class="element__btn-like" type="button" aria-label="лайк"></button>
-            </div>
-          </article>
-        </section>
+        <!-- сюда идут данные из card-template-->
+        <section class="elements"></section>
       </main>
 
       <footer class="footer">
@@ -89,18 +37,53 @@
       </footer>
     </div>
     
-    <!--popup-->
-    <div class="popup">
-      <div class="popup__container">
-        <button class="popup__close-btn" type="button" aria-label="закрыть"></button>
-        <h3 class="popup__title">Редактировать профиль</h3>
-        <form class="popup__form" name="editForm">
+    <!--popup edit-->
+    <div class="popup popup_edit">
+      <div class="popup__container popup__container_edit">
+        <button class="popup__close-btn popup__close-btn_edit" type="button" aria-label="закрыть"></button>
+        <h2 class="popup__title popup__title_edit">Редактировать профиль</h2>
+        <form class="popup__form popup__form_edit" name="editForm">
           <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Введите имя">
           <input class="popup__input popup__input_type_job" type="text" name="job" placeholder="Введите профессию">
           <button class="popup__save-btn" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
+
+    <!--popup newplace-->
+    <div class="popup popup_new-place">
+      <div class="popup__container popup__container_new-place">
+        <button class="popup__close-btn popup__close-btn_new-place" type="button" aria-label="закрыть"></button>
+        <h2 class="popup__title popup__title_new-place">Новое место</h2>
+        <form class="popup__form popup__form_new-place" name="editForm">
+          <input class="popup__input popup__input_type_nameplace" type="text" name="nameplace" placeholder="Название">
+          <input class="popup__input popup__input_type_image" type="url" name="image" placeholder="Ссылка на картинку">
+          <button class="popup__create-btn" type="submit">Создать</button>
+        </form>
+      </div>
+    </div>
+
+    <!--popup image-->
+    <div class="popup popup_image">
+      <figure class="popup__figure">
+        <button class="popup__close-btn popup__close-btn_image" type="button" aria-label="закрыть"></button>
+        <img class="popup__picture" src="./images/moscow.jpg" alt="Москва">
+        <figcaption class="popup__picture-caption"></figcaption>
+      </figure>
+    </div>
+
+    <!--template на elements-->
+    <template id="card-template">
+      <article class="element">
+        <img class="element__image">
+        <button class="element__btn-delete" type="button" aria-label="удалить"></button>
+        <div class="element__group">
+          <h2 class="element__title"></h2>
+          <button class="element__btn-like" type="button" aria-label="лайк"></button>
+        </div>
+      </article>
+    </template>
+    <script src="./pages/constants.js"></script>
     <script src="./pages/index.js"></script>
   </body>
 </html>
