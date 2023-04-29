@@ -1,10 +1,8 @@
-const popup = document.querySelector('.popup');
 //попап изменения профиля
 const popupEdit = document.querySelector('.popup_edit');
 const editPopupOpen = document.querySelector('.profile__edit-btn');
 const editPopupClose = popupEdit.querySelector('.popup__close-btn');
-
-const formElement = popupEdit.querySelector('.popup__form_edit');
+const profileForm = document.forms['profile-form'];
 const nameInput = popupEdit.querySelector('.popup__input_type_name');
 const jobInput = popupEdit.querySelector('.popup__input_type_job');
 const nameInProfile = document.querySelector('.profile__title');
@@ -13,61 +11,62 @@ const jobInProfile = document.querySelector('.profile__subtitle');
 const popupCreate = document.querySelector('.popup_new-place');
 const createPopupOpen = document.querySelector('.profile__add-btn');
 const createPopupClose = popupCreate.querySelector('.popup__close-btn');
+const cardForm = document.forms['card-form'];
+const textInput = cardForm.querySelector('.popup__input_type_nameplace');
+const imageInput = cardForm.querySelector('.popup__input_type_image');
 
-const formCreateElement = popupCreate.querySelector('.popup__form_new-place');
-const textInput = formCreateElement.querySelector('.popup__input_type_nameplace');
-const imageInput = formCreateElement.querySelector('.popup__input_type_image');
 
-
-//тогл попапов
-//универсальная функция тоглим попапы
-function togglePopup(popup) {
-  popup.classList.toggle('popup_opened');
+//универсальная функция открытия и закрытия попапов
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 }
 
-//попап изменения профиля открыть-закрыть
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+}
+//универсальный обработчик крестиков (кнопок закрытия)
+const closeButtons = document.querySelectorAll('.popup__close-btn');
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
+
+
+//попап-1: изменения данных профиля
 editPopupOpen.addEventListener('click', function() {
   nameInput.value = nameInProfile.textContent;
   jobInput.value = jobInProfile.textContent;
-  togglePopup(popupEdit);
+  openPopup(popupEdit);
 });
 
-editPopupClose.addEventListener('click', function() {
-  togglePopup(popupEdit);
-});
-
-function handleFormSubmit(evt) { //передать значения в форму
+function handleProfileFormSubmit(evt) { //передать значения в форму и закрыть
   evt.preventDefault();
   nameInProfile.textContent = nameInput.value;
   jobInProfile.textContent = jobInput.value;
-  togglePopup(popupEdit);
+  closePopup(popupEdit);
 }
 
-formElement.addEventListener('submit', handleFormSubmit); //сохранить изменения
+profileForm.addEventListener('submit', handleProfileFormSubmit); //сохранить изменения
 
 
-// попап добавления карточки
+//попап-2: добавления карточки
 createPopupOpen.addEventListener('click', function() {
-  togglePopup(popupCreate);
+  openPopup(popupCreate);
 });
-
-createPopupClose.addEventListener('click', function() {
-  togglePopup(popupCreate);
-})
 
 function handleFormAddSubmit(evt) { //передать значения в форму
   evt.preventDefault();
   const newArr = {name: textInput.value, link: imageInput.value};
   const element = createCardElement(newArr);
   cardsContainer.prepend(element);
-  formCreateElement.reset();
-  togglePopup(popupCreate);
+  cardForm.reset();
+  closePopup(popupCreate);
 }
 
-formCreateElement.addEventListener('submit', handleFormAddSubmit); //сохраняем новую карточку
+cardForm.addEventListener('submit', handleFormAddSubmit); //сохраняем новую карточку
 
 
-//работа с темплейт и удаление карточек
+//работа с темплейт, лайк и удаление карточек
 const cardTemplate = document.getElementById('card-template');
 const cardsContainer = document.querySelector('.elements');
 
@@ -77,19 +76,32 @@ const createCardElement = (cardData) => {
   const cardTitle = cardElement.querySelector('.element__title');
   const cardDeleteButton = cardElement.querySelector('.element__btn-delete');
   const cardLikeButton = cardElement.querySelector('.element__btn-like');
+  //popup image
+  const popupImage = document.querySelector('.popup_image');
+  const imagePopupClose = popupImage.querySelector('.popup__close-btn');
+  const popupImagePicture = popupImage.querySelector('.popup__picture');
+  const popupImageCaption = popupImage.querySelector('.popup__picture-caption');
 
   cardTitle.textContent = cardData.name;
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
 
-  const handleDelete = () => {
+  const handleDelete = () => { //удаление
     cardElement.remove();
   };
 
-  const handleLike = (evt) => {
+  const handleLike = (evt) => { //лайк
     cardLikeButton.classList.toggle('element__btn-like_active');
   };
 
+  function zoom() {
+    openPopup(popupImage);
+    popupImagePicture.src = cardData.link;
+    popupImagePicture.alt = cardData.alt;
+    popupImageCaption.textContent = cardData.name;
+  }
+
+  cardImage.addEventListener('click', zoom);
   cardDeleteButton.addEventListener('click', handleDelete);
   cardLikeButton.addEventListener('click', handleLike);
 
@@ -100,26 +112,4 @@ const createCardElement = (cardData) => {
 initialCards.forEach((card) => {
   const element = createCardElement(card);
   cardsContainer.prepend(element);
-});
-
-
-//popup image
-const popupImage = document.querySelector('.popup_image');
-const imagePopupOpen = document.querySelectorAll('.element__image');
-const imagePopupClose = popupImage.querySelector('.popup__close-btn');
-const popupImagePicture = popupImage.querySelector('.popup__picture');
-const popupImageCaption = popupImage.querySelector('.popup__picture-caption');
-
-// открываем попап-картинку
-imagePopupOpen.forEach((elementImage) => {
-  elementImage.addEventListener('click', () => {
-    popupImagePicture.src = elementImage.src;
-    popupImagePicture.alt = elementImage.alt;
-    popupImageCaption.textContent = elementImage.alt;
-    togglePopup(popupImage);
-  });
-});
-
-imagePopupClose.addEventListener('click', function() {
-  togglePopup(popupImage);
 });
